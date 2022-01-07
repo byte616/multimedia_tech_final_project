@@ -6,18 +6,18 @@ from PIL import ImageFilter
 def add_border1(file_name):
     image = Image.open(file_name)
     image = ImageOps.expand(image, border=100, fill='white')
-    image.save("deal.jpg")
+    image.save("../example_result/deal.jpg")
     return image.size
 
 def add_border2():
-    img = Image.open('deal.jpg')
+    img = Image.open('../example_result/deal.jpg')
     [a,b]=img.size
     new_pic = Image.new('RGB', (img.size[0] , img.size[1] + int(a/2)), (255,255,255))
     new_pic.paste(img, (3, 3))
     return new_pic
 
 def add_text():
-    title_font = ImageFont.truetype('./FONT/AA.ttf',100)
+    title_font = ImageFont.truetype('../FONT/AA.ttf',100)
     title_text1="我不會去摘月亮"
     title_text2="我要月亮奔我而來"
     image_editable = ImageDraw.Draw(new_pic)
@@ -38,7 +38,7 @@ def softlightFilter(im):
             g = 250 if g+30>250 else g+45
             b = 250 if b+30>250 else b+45
             pixels[i,j] = (r, g, b)
-    im.save("result1.jpg")
+    im.save("../example_result/result1.jpg")
 
 def RGBtoGRAY(im):
     im_width, im_height = im.size
@@ -48,7 +48,7 @@ def RGBtoGRAY(im):
             r, g, b = pixels[i, j]
             gray = math.floor((r*30 + g*59 + b*11 + 50)/100)
             pixels[i,j] = (gray, gray, gray)
-    im.save("result2.jpg")
+    im.save("../example_result/result2.jpg")
 
 def rmRED(im):
     im_width, im_height = im.size
@@ -60,7 +60,7 @@ def rmRED(im):
             g = 250 if g+30>250 else g+45
             b = 250 if b+30>250 else b+45
             pixels[i,j] = (r, g, b)
-    im.save("result3.jpg")
+    im.save("../example_result/result3.jpg")
 
 def inverted(im):
     im_width, im_height = im.size
@@ -72,21 +72,21 @@ def inverted(im):
             g = 255-g
             b = 255-b
             pixels[i,j] = (r, g, b)
-    im.save("result4.jpg")
+    im.save("../example_result/result4.jpg")
 
 def edge(im):
     im=im.filter(ImageFilter.FIND_EDGES)
-    im.save("result5.jpg")
+    im.save("../example_result/result5.jpg")
 
 ## file name
-file_name="42.jpg"
+file_name="../image/42.jpg"
 ## add border
 [a,b]=add_border1(file_name)
 new_pic=add_border2()
 ## add text
 add_text()
 ## save original pic
-new_pic.save('result.jpg')
+new_pic.save('../example_result/result.jpg')
 print("SUCCESS #1")
 ## softlight
 softlightFilter(new_pic)
